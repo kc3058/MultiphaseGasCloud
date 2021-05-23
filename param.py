@@ -30,20 +30,29 @@ class Param:
                            "V_MAX", 
                            "V_MIN", 
                            "M_MAX", 
-                           "M_MIN"]
-                floatList = ["GAMMA", 
-                             "V_MU", 
+                           "M_MIN", 
+                           'R_STEPS', 
+                           'BACK_REACTION']
+                floatList = ["V_MU", 
                              "V_SIGMA", 
                              "M_MU", 
                              "M_SIGMA", 
                              'WIND_MU', 
                              'R_START', 
+                             'R_DELTA', 
                              'SONIC_POINT', 
                              'SFR', 
                              'EDOT', 
                              'ALPHA', 
                              'BETA', 
-                             'CLOUD_MASS']
+                             'CLOUD_MASS', 
+                             'METALLICITY', 
+                             'CLOUD_TEMP', 
+                             'F_TURB0', 
+                             'MDOT_CHI_POWER', 
+                             'E_SN',
+                             'M_PER_SN', 
+                             'CLOUD_ALPHA']
                 if pline[0] in intList:
                     self.paramDict[pline[0]]=int(pline[1])
                 elif pline[0] in floatList:
@@ -52,10 +61,12 @@ class Param:
                     self.paramDict[pline[0]]=pline[1]
         fp.close
 
+        self.paramDict['GAMMA'] = 5/3
         self.paramDict['R_START'] = self.paramDict['R_START'] * const.pc
+        self.paramDict['R_DELTA'] = self.paramDict['R_DELTA'] * const.pc        
         self.paramDict['SONIC_POINT'] = self.paramDict['SONIC_POINT'] * const.pc
         self.paramDict['SFR'] = self.paramDict['SFR'] * const.Msun / const.yr
-        self.paramDict['EDOT']= self.paramDict['EDOT'] * self.paramDict['ALPHA'] * (self.paramDict['SFR']/(const.Msun/const.yr))
         self.paramDict['MDOT']= self.paramDict['BETA'] * self.paramDict['SFR']
-
+        self.paramDict['M_PER_SN'] = self.paramDict['M_PER_SN'] * const.Msun
+        self.paramDict['EDOT'] = self.paramDict['ALPHA'] * self.paramDict['E_SN'] * self.paramDict['SFR'] / self.paramDict['M_PER_SN'] 
         
