@@ -52,7 +52,8 @@ class Param:
                              'MDOT_CHI_POWER', 
                              'E_SN',
                              'M_PER_SN', 
-                             'CLOUD_ALPHA']
+                             'CLOUD_ALPHA', 
+                             'V_CIR']
                 if pline[0] in intList:
                     self.paramDict[pline[0]]=int(pline[1])
                 elif pline[0] in floatList:
@@ -61,6 +62,7 @@ class Param:
                     self.paramDict[pline[0]]=pline[1]
         fp.close
 
+        self.paramDict['V_CIR'] = self.paramDict['V_CIR'] * const.km / const.s
         self.paramDict['GAMMA'] = 5/3
         self.paramDict['R_START'] = self.paramDict['R_START'] * const.pc
         self.paramDict['R_DELTA'] = self.paramDict['R_DELTA'] * const.pc        

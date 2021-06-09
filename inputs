@@ -1,11 +1,12 @@
 ##############################################################################
 #
 # Author    : Anthony Chow
-# Date      : 1st Jan 2020
+# Date      : 1st May 2021
 #
 # File name : inputs
 #
-# Description : File contains user's specified input parameters for both 
+# Description : File contains user's specified 
+#               input parameters for both 
 #               multiphase galactic wind
 #
 ###############################################################################
@@ -15,13 +16,13 @@ V_CELLS = 150
 M_CELLS = 150
 R_CELLS = 40        
 
-V_MAX = 3500
-V_MIN = 0
-V_MU = 50
-V_SIGMA = 10
+V_MAX = 3000
+V_MIN = 1
+V_MU = 100   
+V_SIGMA = 30
 M_MAX = 6     #5
 M_MIN = -10     #1
-M_MU = 3      #3
+M_MU = 3    #3
 M_SIGMA = 0.5    #0.5
 
 CLOUD_TEMP = 1E4
@@ -34,17 +35,20 @@ CLOUD_ALPHA = 0.2  # Cloud flux loading factor
 
 #####WIND#############
 WIND_MU = 0.62    # mean molecular weight
-SFR = 50 # (Msun/yr)    #20
+SFR = 20 # (Msun/yr)    #20
 BETA = 0.1   # mass loading
 ALPHA = 1.  # energy loading
 E_SN = 1E51    #(erg/s)
 M_PER_SN = 100   #100
 
+
 SONIC_POINT = 300
 R_START = 450
-R_DELTA = 50    # (pc)
-R_STEPS = 80
+R_DELTA = 10    # (pc)
+R_STEPS = 160
 COOL_FILE = Lambda_tab_redshifts.npz
 METALLICITY = 1E-10
+
+V_CIR = 150 #(km/s)
 
 BACK_REACTION = 1
