@@ -32,7 +32,11 @@ class Param:
                            "M_MAX", 
                            "M_MIN", 
                            'R_STEPS', 
-                           'BACK_REACTION']
+                           'BACK_REACTION',
+                           'TWO_FACES', 
+                           'FLUX_CORRECTION',
+                           'NBS_CLOUD',
+                           'RETIRE_FLAG']
                 floatList = ["V_MU", 
                              "V_SIGMA", 
                              "M_MU", 
@@ -46,14 +50,17 @@ class Param:
                              'ALPHA', 
                              'BETA', 
                              'CLOUD_MASS', 
-                             'METALLICITY', 
+                             'WIND_METALLICITY', 
+                             'CLOUD_METALLICITY',
                              'CLOUD_TEMP', 
                              'F_TURB0', 
                              'MDOT_CHI_POWER', 
                              'E_SN',
                              'M_PER_SN', 
                              'CLOUD_ALPHA', 
-                             'V_CIR']
+                             'V_CIR', 
+                             'RETIREMENT_MASS',
+                             'CFL_MC']
                 if pline[0] in intList:
                     self.paramDict[pline[0]]=int(pline[1])
                 elif pline[0] in floatList:
@@ -62,6 +69,7 @@ class Param:
                     self.paramDict[pline[0]]=pline[1]
         fp.close
 
+        self.paramDict['RETIREMENT_MASS'] *= const.Msun
         self.paramDict['V_CIR'] = self.paramDict['V_CIR'] * const.km / const.s
         self.paramDict['GAMMA'] = 5/3
         self.paramDict['R_START'] = self.paramDict['R_START'] * const.pc

@@ -16,22 +16,24 @@ V_CELLS = 150
 M_CELLS = 150
 R_CELLS = 40        
 
-V_MAX = 3000
-V_MIN = 1
+V_MAX = 2000
+V_MIN = 0
 V_MU = 100   
 V_SIGMA = 30
-M_MAX = 6     #5
-M_MIN = -10     #1
-M_MU = 3    #3
-M_SIGMA = 0.5    #0.5
+M_MAX = 5     #5
+M_MIN = -1    #1
+M_MU = 2.5    #3
+M_SIGMA = 0.75    #0.5
 
 CLOUD_TEMP = 1E4
 F_TURB0 = 0.1
 MDOT_CHI_POWER = 0.5
+RETIREMENT_MASS = 1
+RETIRE_FLAG = 1
 
 
 CLOUD_ALPHA = 0.2  # Cloud flux loading factor
-
+CLOUD_METALLICITY = 0.001
 
 #####WIND#############
 WIND_MU = 0.62    # mean molecular weight
@@ -44,11 +46,22 @@ M_PER_SN = 100   #100
 
 SONIC_POINT = 300
 R_START = 450
-R_DELTA = 10    # (pc)
+R_DELTA = 10   # (pc)
 R_STEPS = 160
 COOL_FILE = Lambda_tab_redshifts.npz
-METALLICITY = 1E-10
+WIND_METALLICITY = 1E-10
 
 V_CIR = 150 #(km/s)
 
 BACK_REACTION = 1
+
+
+
+######Control########
+TWO_FACES = 1
+FLUX_CORRECTION = 0
+
+
+######MonteCarlo########
+NBS_CLOUD = 5000
+CFL_MC = 0.01

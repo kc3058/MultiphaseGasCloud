@@ -17,3 +17,4 @@ class Const:
     Msun    = 2.e33
     fb      = 0.158
     keV     = 1.60218e-9
+    wind_mu = 0.62
