@@ -36,12 +36,14 @@ class Param:
                            'TWO_FACES', 
                            'FLUX_CORRECTION',
                            'NBS_CLOUD',
-                           'RETIRE_FLAG']
+                           'RETIRE_FLAG',
+                           'CUST_SCHEDULE']
                 floatList = ["V_MU", 
                              "V_SIGMA", 
                              "M_MU", 
                              "M_SIGMA", 
-                             'WIND_MU', 
+                             'WIND_MU',
+                             'R_MIN',
                              'R_START', 
                              'R_DELTA', 
                              'SONIC_POINT', 
@@ -60,7 +62,17 @@ class Param:
                              'CLOUD_ALPHA', 
                              'V_CIR', 
                              'RETIREMENT_MASS',
-                             'CFL_MC']
+                             'CFL_MC',
+                             'POWER_LAW_MAX_MASS',
+                             'POWER_LAW_MIN_MASS',
+                             'POWER_LAW_SLOPE', 
+                             'TURBULENT_VELOCITY_CHI_POWER', 
+                             'GEOMETRIC_FACTOR', 
+                             'COOLING_AREA_CHI_POWER', 
+                             'COLD_TURBULENCE_CHI_POWER',
+                             'MDOT_COEFFICIENT',
+                             'DRAG_COEFF', 
+                             'M_CLOUD_MIN']
                 if pline[0] in intList:
                     self.paramDict[pline[0]]=int(pline[1])
                 elif pline[0] in floatList:
@@ -70,8 +82,12 @@ class Param:
         fp.close
 
         self.paramDict['RETIREMENT_MASS'] *= const.Msun
+        self.paramDict['M_CLOUD_MIN'] *= const.Msun        
+        self.paramDict['WIND_METALLICITY'] *= const.ZSun
+        self.paramDict['CLOUD_METALLICITY'] *= const.ZSun        
         self.paramDict['V_CIR'] = self.paramDict['V_CIR'] * const.km / const.s
-        self.paramDict['GAMMA'] = 5/3
+        self.paramDict['GAMMA'] = 5/3        
+        self.paramDict['R_MIN'] = self.paramDict['R_MIN'] * const.pc
         self.paramDict['R_START'] = self.paramDict['R_START'] * const.pc
         self.paramDict['R_DELTA'] = self.paramDict['R_DELTA'] * const.pc        
         self.paramDict['SONIC_POINT'] = self.paramDict['SONIC_POINT'] * const.pc
@@ -79,4 +95,9 @@ class Param:
         self.paramDict['MDOT']= self.paramDict['BETA'] * self.paramDict['SFR']
         self.paramDict['M_PER_SN'] = self.paramDict['M_PER_SN'] * const.Msun
         self.paramDict['EDOT'] = self.paramDict['ALPHA'] * self.paramDict['E_SN'] * self.paramDict['SFR'] / self.paramDict['M_PER_SN'] 
+        
+        import pickle
+        with open('cust_schedule.obj','rb') as file_object:
+            raw_data = pickle.load(file_object)
+        self.paramDict['CUSTOM_SCHEDULE'] = raw_data
         
